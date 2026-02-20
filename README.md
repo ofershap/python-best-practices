@@ -1,7 +1,7 @@
 # Python Best Practices
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Skills](https://img.shields.io/badge/skills.sh-python--best--practices-blue)](https://skills.sh/ofershap/python-best-practices/python-best-practices)
+[![Skills](https://img.shields.io/badge/skills.sh-python--best--practices-blue)](https://skills.sh/ofershap/python-best-practices)
 
 Modern Python 3.12+ patterns your AI agent should use. Type hints with `X | Y` syntax, Pydantic v2,
 uv package manager, match statements, `pathlib`, `pyproject.toml`, `TaskGroup`, and PEP 695
@@ -16,7 +16,7 @@ generics.
 ### Cursor / Claude Code / Windsurf
 
 ```bash
-npx skills add ofershap/python-best-practices/python-best-practices
+npx skills add ofershap/python-best-practices
 ```
 
 Or copy `skills/` into your `.cursor/skills/` or `.claude/skills/` directory.

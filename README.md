@@ -1,23 +1,15 @@
 # Python Best Practices
 
-Modern Python 3.12+ patterns your AI agent should use. Type hints, async/await, Pydantic v2, uv
-package manager, match statements, and project structure.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Skills](https://img.shields.io/badge/skills.sh-python--best--practices-blue)](https://skills.sh/ofershap/python-best-practices/python-best-practices)
+
+Modern Python 3.12+ patterns your AI agent should use. Type hints with `X | Y` syntax, Pydantic v2, uv package manager, match statements, `pathlib`, `pyproject.toml`, `TaskGroup`, and PEP 695 generics.
+
+> AI coding assistants generate `from typing import List, Union, Optional`, use Pydantic v1 decorators, create `setup.py`, and reach for `os.path` instead of `pathlib`. This plugin keeps your agent on Python 3.12+ patterns.
 
 ## Install
 
-### Cursor IDE
-
-```
-/add-plugin python-best-practices
-```
-
-### Claude Code
-
-```
-/plugin install python-best-practices
-```
-
-### Skills only (any agent)
+### Cursor / Claude Code / Windsurf
 
 ```bash
 npx skills add ofershap/python-best-practices/python-best-practices
@@ -27,33 +19,35 @@ Or copy `skills/` into your `.cursor/skills/` or `.claude/skills/` directory.
 
 ## What's Included
 
-### Skills
+| Type | Name | Description |
+|------|------|-------------|
+| Skill | `python-best-practices` | 15 rules for type hints, Pydantic v2, uv, pathlib, match/case, TaskGroup, and more |
+| Rule | `best-practices` | Always-on behavioral rule that enforces Python 3.12+ patterns |
+| Command | `/audit` | Scan your codebase for outdated Python patterns |
 
-- **python-best-practices** - Modern Python 3.12+ patterns your AI agent should use. Type hints,
-  async/await, Pydantic v2, uv package manager, match statements, and project structure.
+## What Agents Get Wrong
 
-### Rules
+| What the agent writes | What Python 3.12+ uses |
+|-----------------------|------------------------|
+| `from typing import List, Union, Optional` | `list[str]`, `X \| Y`, `X \| None` |
+| `@validator`, `@root_validator` | `field_validator`, `model_validator` (Pydantic v2) |
+| `class Config:` in Pydantic models | `model_config = ConfigDict(...)` |
+| `os.path.join()`, string paths | `pathlib.Path` for all file operations |
+| `setup.py`, `requirements.txt` | `pyproject.toml` with uv |
+| `TypeVar("T")` + `Generic[T]` | `def f[T](x: T) -> T` (PEP 695) |
+| `asyncio.gather()` | `TaskGroup` for structured concurrency |
 
-- **best-practices** - Always-on rules that enforce current Python patterns
+## Related Plugins
 
-### Commands
+- [fastapi-best-practices](https://github.com/ofershap/fastapi-best-practices) - FastAPI async patterns, Depends(), project structure
+- [typescript-best-practices](https://github.com/ofershap/typescript-best-practices) - TypeScript 5.x strict patterns
 
-- `/audit` - Scan your codebase for Python anti-patterns
+## Author
 
-## Why This Plugin?
+[![Made by ofershap](https://gitshow.dev/api/card/ofershap)](https://gitshow.dev/ofershap)
 
-AI agents are trained on data that includes outdated patterns. This plugin ensures your agent uses
-current Python best practices:
-
-1. **Outdated type hints** - Agents emit `from typing import List, Union, Optional` and `List[str]`
-   instead of `list[str]` and `X | Y`.
-2. **Pydantic v1 API** - Agents use deprecated `@validator`, `@root_validator`, and `class Config`
-   instead of `field_validator`, `model_validator`, and `ConfigDict`.
-3. **Legacy path handling** - Agents use `os.path.join` and string paths instead of `pathlib.Path`.
-4. **Old packaging** - Agents create `setup.py` and `requirements.txt` instead of `pyproject.toml`
-   and uv.
-5. **Pre-PEP 695 generics** - Agents use `TypeVar` and `Generic[T]` instead of Python 3.12+ type
-   parameter syntax `def f[T](x: T) -> T`.
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/ofershap)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=flat&logo=github&logoColor=white)](https://github.com/ofershap)
 
 ## License
 

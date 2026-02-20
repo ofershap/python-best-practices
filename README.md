@@ -3,9 +3,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Skills](https://img.shields.io/badge/skills.sh-python--best--practices-blue)](https://skills.sh/ofershap/python-best-practices/python-best-practices)
 
-Modern Python 3.12+ patterns your AI agent should use. Type hints with `X | Y` syntax, Pydantic v2, uv package manager, match statements, `pathlib`, `pyproject.toml`, `TaskGroup`, and PEP 695 generics.
+Modern Python 3.12+ patterns your AI agent should use. Type hints with `X | Y` syntax, Pydantic v2,
+uv package manager, match statements, `pathlib`, `pyproject.toml`, `TaskGroup`, and PEP 695
+generics.
 
-> AI coding assistants generate `from typing import List, Union, Optional`, use Pydantic v1 decorators, create `setup.py`, and reach for `os.path` instead of `pathlib`. This plugin keeps your agent on Python 3.12+ patterns.
+> AI coding assistants generate `from typing import List, Union, Optional`, use Pydantic v1
+> decorators, create `setup.py`, and reach for `os.path` instead of `pathlib`. This plugin keeps
+> your agent on Python 3.12+ patterns.
 
 ## Install
 
@@ -19,28 +23,30 @@ Or copy `skills/` into your `.cursor/skills/` or `.claude/skills/` directory.
 
 ## What's Included
 
-| Type | Name | Description |
-|------|------|-------------|
-| Skill | `python-best-practices` | 15 rules for type hints, Pydantic v2, uv, pathlib, match/case, TaskGroup, and more |
-| Rule | `best-practices` | Always-on behavioral rule that enforces Python 3.12+ patterns |
-| Command | `/audit` | Scan your codebase for outdated Python patterns |
+| Type    | Name                    | Description                                                                        |
+| ------- | ----------------------- | ---------------------------------------------------------------------------------- |
+| Skill   | `python-best-practices` | 15 rules for type hints, Pydantic v2, uv, pathlib, match/case, TaskGroup, and more |
+| Rule    | `best-practices`        | Always-on behavioral rule that enforces Python 3.12+ patterns                      |
+| Command | `/audit`                | Scan your codebase for outdated Python patterns                                    |
 
 ## What Agents Get Wrong
 
-| What the agent writes | What Python 3.12+ uses |
-|-----------------------|------------------------|
-| `from typing import List, Union, Optional` | `list[str]`, `X \| Y`, `X \| None` |
-| `@validator`, `@root_validator` | `field_validator`, `model_validator` (Pydantic v2) |
-| `class Config:` in Pydantic models | `model_config = ConfigDict(...)` |
-| `os.path.join()`, string paths | `pathlib.Path` for all file operations |
-| `setup.py`, `requirements.txt` | `pyproject.toml` with uv |
-| `TypeVar("T")` + `Generic[T]` | `def f[T](x: T) -> T` (PEP 695) |
-| `asyncio.gather()` | `TaskGroup` for structured concurrency |
+| What the agent writes                      | What Python 3.12+ uses                             |
+| ------------------------------------------ | -------------------------------------------------- |
+| `from typing import List, Union, Optional` | `list[str]`, `X \| Y`, `X \| None`                 |
+| `@validator`, `@root_validator`            | `field_validator`, `model_validator` (Pydantic v2) |
+| `class Config:` in Pydantic models         | `model_config = ConfigDict(...)`                   |
+| `os.path.join()`, string paths             | `pathlib.Path` for all file operations             |
+| `setup.py`, `requirements.txt`             | `pyproject.toml` with uv                           |
+| `TypeVar("T")` + `Generic[T]`              | `def f[T](x: T) -> T` (PEP 695)                    |
+| `asyncio.gather()`                         | `TaskGroup` for structured concurrency             |
 
 ## Related Plugins
 
-- [fastapi-best-practices](https://github.com/ofershap/fastapi-best-practices) - FastAPI async patterns, Depends(), project structure
-- [typescript-best-practices](https://github.com/ofershap/typescript-best-practices) - TypeScript 5.x strict patterns
+- [fastapi-best-practices](https://github.com/ofershap/fastapi-best-practices) - FastAPI async
+  patterns, Depends(), project structure
+- [typescript-best-practices](https://github.com/ofershap/typescript-best-practices) - TypeScript
+  5.x strict patterns
 
 ## Author
 

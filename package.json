@@ -8,7 +8,18 @@
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
-  "keywords": ["python", "python3", "best-practices", "type-hints", "async", "pydantic", "uv", "cursor-plugin", "claude-code", "ai-agent"],
+  "keywords": [
+    "python",
+    "python3",
+    "best-practices",
+    "type-hints",
+    "async",
+    "pydantic",
+    "uv",
+    "cursor-plugin",
+    "claude-code",
+    "ai-agent"
+  ],
   "author": {
     "name": "Ofer Shapira",
     "url": "https://github.com/ofershap"

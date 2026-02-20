@@ -11,6 +11,17 @@
   "homepage": "https://github.com/ofershap/python-best-practices",
   "repository": "https://github.com/ofershap/python-best-practices",
   "license": "MIT",
-  "keywords": ["python", "python3", "best-practices", "type-hints", "async", "pydantic", "uv", "cursor-plugin", "claude-code", "ai-agent"],
+  "keywords": [
+    "python",
+    "python3",
+    "best-practices",
+    "type-hints",
+    "async",
+    "pydantic",
+    "uv",
+    "cursor-plugin",
+    "claude-code",
+    "ai-agent"
+  ],
   "logo": "assets/logo.svg"
 }

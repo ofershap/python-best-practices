@@ -1,19 +1,24 @@
 ---
 name: python-best-practices
-description: Modern Python 3.12+ patterns your AI agent should use. Type hints, async/await, Pydantic v2, uv, match statements, and project structure.
+description:
+  Modern Python 3.12+ patterns your AI agent should use. Type hints, async/await, Pydantic v2, uv,
+  match statements, and project structure.
 metadata:
   tags: python, type-hints, best-practices, async
 ---
 
 ## When to use
 
-Use this skill when writing or reviewing Python code targeting Python 3.12+. It enforces modern type hints, async patterns, Pydantic v2 API, project structure, and standard library usage. Agents trained on older codebases often emit outdated patterns; this skill corrects that.
+Use this skill when writing or reviewing Python code targeting Python 3.12+. It enforces modern type
+hints, async patterns, Pydantic v2 API, project structure, and standard library usage. Agents
+trained on older codebases often emit outdated patterns; this skill corrects that.
 
 ## Critical Rules
 
 ### 1. Use modern type hint syntax
 
 **Wrong:**
+
 ```python
 from typing import Union, List, Dict, Optional
 
@@ -22,16 +27,19 @@ def process(items: List[str]) -> Optional[Dict[str, Union[int, str]]]:
 ```
 
 **Correct:**
+
 ```python
 def process(items: list[str]) -> dict[str, int | str] | None:
     ...
 ```
 
-**Why:** `list[str]` and `X | Y` are built-in in Python 3.9+ (PEP 585, PEP 604). Importing `typing.List`, `typing.Union`, `typing.Optional` is verbose and deprecated for built-in generics.
+**Why:** `list[str]` and `X | Y` are built-in in Python 3.9+ (PEP 585, PEP 604). Importing
+`typing.List`, `typing.Union`, `typing.Optional` is verbose and deprecated for built-in generics.
 
 ### 2. Use type parameter syntax (PEP 695, Python 3.12+)
 
 **Wrong:**
+
 ```python
 from typing import TypeVar
 
@@ -42,16 +50,19 @@ def max(args: list[T]) -> T:
 ```
 
 **Correct:**
+
 ```python
 def max[T](args: list[T]) -> T:
     ...
 ```
 
-**Why:** PEP 695 type parameters are simpler and local to the function/class. Same for generic classes: `class Bag[T]:` instead of `class Bag(Generic[T]):`.
+**Why:** PEP 695 type parameters are simpler and local to the function/class. Same for generic
+classes: `class Bag[T]:` instead of `class Bag(Generic[T]):`.
 
 ### 3. Use match/case instead of if/elif chains for pattern matching
 
 **Wrong:**
+
 ```python
 def http_error(status: int) -> str:
     if status == 400:
@@ -65,6 +76,7 @@ def http_error(status: int) -> str:
 ```
 
 **Correct:**
+
 ```python
 def http_error(status: int) -> str:
     match status:
@@ -78,11 +90,13 @@ def http_error(status: int) -> str:
             return "Something's wrong"
 ```
 
-**Why:** Structural pattern matching (PEP 634) is clearer for disjoint cases and supports destructuring. Use `case 401 | 403 | 404:` for multiple literals.
+**Why:** Structural pattern matching (PEP 634) is clearer for disjoint cases and supports
+destructuring. Use `case 401 | 403 | 404:` for multiple literals.
 
 ### 4. Use Pydantic v2 API, never v1
 
 **Wrong:**
+
 ```python
 from pydantic import BaseModel, validator, root_validator
 
@@ -102,6 +116,7 @@ class Model(BaseModel):
 ```
 
 **Correct:**
+
 ```python
 from pydantic import BaseModel, field_validator, model_validator, ConfigDict
 
@@ -120,28 +135,33 @@ class Model(BaseModel):
         return self
 ```
 
-**Why:** Pydantic v1 decorators and `class Config` are deprecated. v2 uses `model_config`, `field_validator`, `model_validator` with explicit modes.
+**Why:** Pydantic v1 decorators and `class Config` are deprecated. v2 uses `model_config`,
+`field_validator`, `model_validator` with explicit modes.
 
 ### 5. Use uv for package management in new projects
 
 **Wrong:**
+
 ```bash
 pip install -r requirements.txt
 poetry init
 ```
 
 **Correct:**
+
 ```bash
 uv init
 uv add requests pydantic
 uv sync
 ```
 
-**Why:** uv is fast, has a modern lockfile, and supports pyproject.toml natively. Prefer it for new projects.
+**Why:** uv is fast, has a modern lockfile, and supports pyproject.toml natively. Prefer it for new
+projects.
 
 ### 6. Use pyproject.toml for project configuration
 
 **Wrong:**
+
 ```python
 # setup.py
 from setuptools import setup
@@ -149,6 +169,7 @@ setup(name="myapp", version="0.1", ...)
 ```
 
 **Correct:**
+
 ```toml
 # pyproject.toml
 [project]
@@ -162,6 +183,7 @@ dependencies = ["requests"]
 ### 7. Use pathlib.Path instead of os.path
 
 **Wrong:**
+
 ```python
 import os
 path = os.path.join(os.getcwd(), "data", "file.txt")
@@ -171,6 +193,7 @@ if os.path.exists(path):
 ```
 
 **Correct:**
+
 ```python
 from pathlib import Path
 path = Path.cwd() / "data" / "file.txt"
@@ -178,17 +201,20 @@ if path.exists():
     path.read_text()
 ```
 
-**Why:** pathlib is object-oriented, clearer, and cross-platform. Prefer `Path.read_text()`/`write_text()` over `open()` for simple reads/writes.
+**Why:** pathlib is object-oriented, clearer, and cross-platform. Prefer
+`Path.read_text()`/`write_text()` over `open()` for simple reads/writes.
 
 ### 8. Use f-strings instead of .format() or % formatting
 
 **Wrong:**
+
 ```python
 "User %s has %d items" % (name, count)
 "User {} has {} items".format(name, count)
 ```
 
 **Correct:**
+
 ```python
 f"User {name} has {count} items"
 ```
@@ -198,12 +224,14 @@ f"User {name} has {count} items"
 ### 9. Use dataclasses or Pydantic for structured data, not plain dicts
 
 **Wrong:**
+
 ```python
 def get_user() -> dict:
     return {"name": "Alice", "age": 30}
 ```
 
 **Correct:**
+
 ```python
 from dataclasses import dataclass
 
@@ -221,12 +249,14 @@ def get_user() -> User:
 ### 10. Use asyncio.TaskGroup instead of asyncio.gather (Python 3.11+)
 
 **Wrong:**
+
 ```python
 import asyncio
 results = await asyncio.gather(f1(), f2(), f3())
 ```
 
 **Correct:**
+
 ```python
 import asyncio
 async with asyncio.TaskGroup() as tg:
@@ -238,9 +268,10 @@ results = (t1.result(), t2.result(), t3.result())
 
 **Why:** TaskGroup propagates exceptions correctly and cancels other tasks on failure.
 
-### 11. Use exception groups and except* (Python 3.11+)
+### 11. Use exception groups and except\* (Python 3.11+)
 
 **Wrong:**
+
 ```python
 try:
     ...
@@ -249,6 +280,7 @@ except (ValueError, TypeError) as e:
 ```
 
 **Correct (when dealing with ExceptionGroup from concurrency):**
+
 ```python
 try:
     ...
@@ -258,17 +290,20 @@ except* OSError as e:
     ...
 ```
 
-**Why:** `except*` handles ExceptionGroups from asyncio and concurrent tasks. Use when catching from TaskGroup or similar.
+**Why:** `except*` handles ExceptionGroups from asyncio and concurrent tasks. Use when catching from
+TaskGroup or similar.
 
 ### 12. Use tomllib for TOML parsing (Python 3.11+ stdlib)
 
 **Wrong:**
+
 ```python
 import toml
 data = toml.load("pyproject.toml")
 ```
 
 **Correct:**
+
 ```python
 import tomllib
 with open("pyproject.toml", "rb") as f:
@@ -280,6 +315,7 @@ with open("pyproject.toml", "rb") as f:
 ### 13. Use typing.override decorator (Python 3.12+)
 
 **Wrong:**
+
 ```python
 class Child(Parent):
     def method(self) -> str:
@@ -287,6 +323,7 @@ class Child(Parent):
 ```
 
 **Correct:**
+
 ```python
 from typing import override
 
@@ -301,6 +338,7 @@ class Child(Parent):
 ### 14. Use structural pattern matching with guards
 
 **Wrong:**
+
 ```python
 match x:
     case (a, b):
@@ -309,6 +347,7 @@ match x:
 ```
 
 **Correct:**
+
 ```python
 match x:
     case (a, b) if a > b:
@@ -320,20 +359,24 @@ match x:
 ### 15. Prefer collections.abc over typing for abstract types
 
 **Wrong:**
+
 ```python
 from typing import Iterable, Mapping
 ```
 
 **Correct:**
+
 ```python
 from collections.abc import Iterable, Mapping
 ```
 
-**Why:** collections.abc is the canonical source for ABCs. typing re-exports them but collections.abc is preferred for runtime checks.
+**Why:** collections.abc is the canonical source for ABCs. typing re-exports them but
+collections.abc is preferred for runtime checks.
 
 ## Patterns
 
 ### Generic class with type parameter
+
 ```python
 class Bag[T]:
     def __iter__(self) -> Iterator[T]:
@@ -343,11 +386,13 @@ class Bag[T]:
 ```
 
 ### Generic type alias
+
 ```python
 type ListOrSet[T] = list[T] | set[T]
 ```
 
 ### Pydantic model_validator before mode
+
 ```python
 @model_validator(mode="before")
 @classmethod
@@ -358,6 +403,7 @@ def check_card_number_not_present(cls, data: Any) -> Any:
 ```
 
 ### Match with multiple literals
+
 ```python
 case 401 | 403 | 404:
     return "Not allowed"
@@ -365,7 +411,8 @@ case 401 | 403 | 404:
 
 ## Anti-Patterns
 
-- Never use `from typing import List, Dict, Union, Optional` for built-in generics; use `list`, `dict`, `X | Y`, `X | None`.
+- Never use `from typing import List, Dict, Union, Optional` for built-in generics; use `list`,
+  `dict`, `X | Y`, `X | None`.
 - Never use `@validator` or `@root_validator` or `class Config` with Pydantic; use v2 API.
 - Never use `os.path` for new code; use `pathlib.Path`.
 - Never use `setup.py` or `setup.cfg`; use `pyproject.toml`.

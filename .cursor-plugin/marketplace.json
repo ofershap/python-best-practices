@@ -1,0 +1,18 @@
+{
+  "name": "python-best-practices",
+  "owner": {
+    "name": "Ofer Shapira",
+    "email": "ofer@shapira.dev"
+  },
+  "metadata": {
+    "description": "Modern Python 3.12+ patterns your AI agent should use. Type hints, async/await, Pydantic v2, uv package manager, match statements, and project structure.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "python-best-practices",
+      "source": ".",
+      "description": "Modern Python 3.12+ patterns your AI agent should use. Type hints, async/await, Pydantic v2, uv package manager, match statements, and project structure."
+    }
+  ]
+}

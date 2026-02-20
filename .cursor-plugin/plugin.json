@@ -1,0 +1,16 @@
+{
+  "name": "python-best-practices",
+  "displayName": "Python Best Practices",
+  "version": "0.1.0",
+  "description": "Modern Python 3.12+ patterns your AI agent should use. Type hints, async/await, Pydantic v2, uv package manager, match statements, and project structure.",
+  "author": {
+    "name": "Ofer Shapira",
+    "email": "ofer@shapira.dev",
+    "url": "https://github.com/ofershap"
+  },
+  "homepage": "https://github.com/ofershap/python-best-practices",
+  "repository": "https://github.com/ofershap/python-best-practices",
+  "license": "MIT",
+  "keywords": ["python", "python3", "best-practices", "type-hints", "async", "pydantic", "uv", "cursor-plugin", "claude-code", "ai-agent"],
+  "logo": "assets/logo.svg"
+}
